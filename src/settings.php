@@ -16,11 +16,13 @@ return [
             'level' => \Monolog\Logger::DEBUG,
         ],
 
+        
         'db' => [
             "host" => "localhost",
             "dbname" => "smartx",
             "user" => "root",
             "pass" => "1234"
         ],
+        
     ],
 ];

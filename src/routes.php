@@ -15,33 +15,9 @@ $app->get('/[{name}]', function (Request $request, Response $response, array $ar
     return $this->renderer->render($response, 'index.phtml', $args);
 });
 
-/*
-// ลองสร้าง Routes หน้า users
-// Route แบบ GET
-$app->get('/api/user/[{id}]', function (Request $request, Response $response, array $args) {
-// การทำงาน
-echo "Hello SmartX API ".$args['id'];
-});
-
-// Route แบบ POST
-$app->post('/api/user/post', function (Request $request, Response $response, array $args) {
-// การทำงาน
-echo "Post data to user complete";
-});
-
-// Route แบบ PUT
-$app->put('/api/user/put', function (Request $request, Response $response, array $args) {
-// การทำงาน
-echo "Update data to user complete";
-});
-
-// Route แบบ PUT
-$app->delete('/api/user/delete', function (Request $request, Response $response, array $args) {
-// การทำงาน
-echo "Delete data to user complete";
-});
-
- */
+// ===============================================================
+// ROUTE FOR USER CRUD 
+// ===============================================================
 
 // ลองทดสอบดึงข้อมูลจากตาราง users
 $app->get('/api/user', function (Request $request, Response $response, array $args)
@@ -166,9 +142,9 @@ $app->post('/api/user/login', function (Request $request, Response $response, ar
     return $this->response->withJson($input);
 });
 
-//-----------------------------------------------------------------------------------------
-//  ส่วนของการทำเพิ่มลบแก้ไขตาราง jobs
-// -----------------------------------------------------------------------------------------
+// ===============================================================
+// ส่วนของการทำเพิ่มลบแก้ไขตาราง jobs
+// ===============================================================
 // ส่วนของการเพิ่มข้อมูลเข้าตาราง jobs
 $app->post('/api/job', function (Request $request, Response $response, array $args)
 {
@@ -230,4 +206,15 @@ $app->post('/api/job', function (Request $request, Response $response, array $ar
     }
 
     return $this->response->withJson($input);
+});
+
+// ลองทดสอบดึงข้อมูลจากตาราง job
+$app->get('/api/job', function (Request $request, Response $response, array $args)
+{
+    // การทำงาน
+    $sql = $this->db->prepare("SELECT * FROM jobs");
+    $sql->execute();
+    $result = $sql->fetchAll();
+
+    return $this->response->withJson($result);
 });
